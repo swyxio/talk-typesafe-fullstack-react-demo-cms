@@ -44,7 +44,7 @@ function App() {
     };
     setBlogs([...blogs, newBlog]);
   }
-  function updateBlog(oldValues: Blog) {
+  function _updateBlog(oldValues: Blog) {
     return async function (newValues: Blog) {
       const timestamp = new Date();
       const newBlog: Blog = {
@@ -69,7 +69,7 @@ function App() {
       >
         <Editor
           onSubmit={
-            currentSelectedBlog ? updateBlog(currentSelectedBlog) : addBlog
+            currentSelectedBlog ? _updateBlog(currentSelectedBlog) : addBlog
           }
           initVals={currentSelectedBlog}
           setCurrentSelectedBlog={setCurrentSelectedBlog}
