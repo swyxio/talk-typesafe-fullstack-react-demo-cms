@@ -22,6 +22,10 @@ import {
 import { Formik, Form, Field } from "formik";
 import { news } from "./news";
 
+import { API } from "aws-amplify";
+import { listBlogs } from "./graphql/queries";
+import { createBlog, updateBlog } from "./graphql/mutations";
+
 type Blog = {
   title: string;
   image: string;
@@ -34,6 +38,13 @@ type Blog = {
 function App() {
   const [blogs, setBlogs] = React.useState<Blog[]>([]);
   const [currentSelectedBlog, setCurrentSelectedBlog] = React.useState<Blog>();
+  React.useEffect(fetchBlogs);
+
+  function fetchBlogs() {
+    const query = API.graphql({ query: listBlogs }) as Promise<any>;
+    query.then(({ data: { listBlogs: { items } } }) => setBlogs(items));
+  }
+
   async function addBlog(values: Blog) {
     const timestamp = new Date();
     const newBlog: Blog = {
@@ -43,8 +54,9 @@ function App() {
       updatedAt: timestamp,
     };
     setBlogs([...blogs, newBlog]);
+    await API.graphql({ query: createBlog, variables: { input: values } });
   }
-  function updateBlog(oldValues: Blog) {
+  function _updateBlog(oldValues: Blog) {
     return async function (newValues: Blog) {
       const timestamp = new Date();
       const newBlog: Blog = {
@@ -53,6 +65,8 @@ function App() {
         updatedAt: timestamp,
       };
       setBlogs([...blogs.filter((x) => x.id !== oldValues.id), newBlog]);
+      const { createdAt, updatedAt, ...input } = newBlog;
+      await API.graphql({ query: updateBlog, variables: { input } });
     };
   }
   return (
@@ -69,7 +83,7 @@ function App() {
       >
         <Editor
           onSubmit={
-            currentSelectedBlog ? updateBlog(currentSelectedBlog) : addBlog
+            currentSelectedBlog ? _updateBlog(currentSelectedBlog) : addBlog
           }
           initVals={currentSelectedBlog}
           setCurrentSelectedBlog={setCurrentSelectedBlog}

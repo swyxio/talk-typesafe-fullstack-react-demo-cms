@@ -6,6 +6,10 @@ import * as serviceWorker from "./serviceWorker";
 
 import { ChakraProvider } from "@chakra-ui/core";
 
+import Amplify from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
+
 // Use at the root of your app
 ReactDOM.render(
   <React.StrictMode>
