@@ -20,6 +20,10 @@ import {
 import { Formik, Form, Field } from "formik";
 import { news } from "./news";
 
+import { API } from 'aws-amplify';
+import { listBlogs } from "./graphql/queries";
+import { createBlog } from "./graphql/mutations";
+
 type Blog = {
   title: string;
   image: string;
@@ -41,7 +45,22 @@ function App() {
       updatedAt: timestamp,
     };
     setBlogs([...blogs, newBlog]);
+    await API.graphql({ query: createBlog, variables: {input: values} })
   }
+  React.useEffect(fetchBlogs);
+
+  function fetchBlogs() {
+    const query = API.graphql({ query: listBlogs }) as Promise<any>
+    query.then(
+      ({
+        data: {
+          listBlogs: { items },
+        },
+      }) => setBlogs(items)
+    );
+  }
+
+
   function _updateBlog(oldValues: Blog) {
     return async function (newValues: Blog) {
       const timestamp = new Date();
@@ -51,6 +70,8 @@ function App() {
         updatedAt: timestamp,
       };
       setBlogs([...blogs.filter((x) => x.id !== oldValues.id), newBlog]);
+      const {createdAt, updatedAt, ...input} = newValues
+      await API.graphql({ query: createBlog, variables: {input} })
     };
   }
   return (
@@ -144,7 +165,7 @@ function BlogLine({
           letterSpacing="wide"
           color="teal.600"
         >
-          {String(blog.updatedAt?.toDateString())}
+          {String(blog.updatedAt)}
         </Text>
         <Text
           mt={1}

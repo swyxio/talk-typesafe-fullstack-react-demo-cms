@@ -1,0 +1,15 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-talkreactsummitdemoc-dev-55529-authRole",
+            "UnauthRoleArn": "arn:aws:iam::754933769358:role/amplify-talkreactsummitdemoc-dev-55529-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::754933769358:role/amplify-talkreactsummitdemoc-dev-55529-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-talkreactsummitdemoc-dev-55529-deployment",
+            "UnauthRoleName": "amplify-talkreactsummitdemoc-dev-55529-unauthRole",
+            "StackName": "amplify-talkreactsummitdemoc-dev-55529",
+            "StackId": "arn:aws:cloudformation:us-east-1:754933769358:stack/amplify-talkreactsummitdemoc-dev-55529/2e48fc50-f79e-11ea-8c06-0e8a1126433d",
+            "AmplifyAppId": "d178ke68uq8o8n"
+        }
+    }
+}
