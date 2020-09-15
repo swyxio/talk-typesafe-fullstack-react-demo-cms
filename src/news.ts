@@ -627,23 +627,6 @@ export const news = [
   {
     source: {
       id: null,
-      name: "Field Gulls",
-    },
-    author: "Brendan O'Leary",
-    title:
-      "Century Links 9/15: Seahawks Prepare for the Patriots - Field Gulls",
-    description: "Read!",
-    url:
-      "https://www.fieldgulls.com/2020/9/15/21437591/seahawks-news-century-links-9-15-seahawks-prepare-for-the-patriots",
-    urlToImage:
-      "https://cdn.vox-cdn.com/thumbor/MZ-RsQpfF97fZ-ZEp2_1sE4NN74=/0x0:5393x2824/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/21881964/1272308910.jpg.jpg",
-    publishedAt: "2020-09-15T13:00:00Z",
-    content:
-      "Patriots Coach Bill Belichick Impressed With SeahawksNew England Patriots coach Bill Belichick raved about Seahawks coach Pete Carroll and numerous Seattle players ahead of this weeks game at Century… [+4516 chars]",
-  },
-  {
-    source: {
-      id: null,
       name: "Live Science",
     },
     author: "Peter Dockrill",

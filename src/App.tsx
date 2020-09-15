@@ -15,8 +15,6 @@ import {
   Container,
   Textarea,
   Heading,
-  // AlertTitle,
-  // AlertDescription,
 } from "@chakra-ui/core";
 
 import { Formik, Form, Field } from "formik";
@@ -57,10 +55,20 @@ function App() {
   }
   return (
     <Flex mx={{ md: "8", base: "2" }} flexDirection="column" align="center">
-      <Stack spacing={3}>
-        <Heading as="h1" fontSize={{ md: "4xl", base: "xl" }} mb="8">
+      <Stack spacing={3} textAlign="center">
+        <Heading as="h1" fontSize={{ md: "4xl", base: "xl" }}>
           React + TypeScript + GraphQL + AWS CMS
         </Heading>
+        <Link
+          fontWeight="bold"
+          my="4"
+          color="blue.900"
+          target="_blank"
+          _hover={{ color: "teal.300", backgroundColor: "blue.900" }}
+          href="https://github.com/sw-yx/talk-react-summit-demo-cms"
+        >
+          https://git.io/JUBZX
+        </Link>
       </Stack>
       <Flex mx="8" flexDirection={{ md: "row", base: "column" }}>
         <Editor
@@ -97,13 +105,6 @@ function App() {
           </Grid>
         )}
       </Flex>
-      <Link
-        fontWeight="bold"
-        color="blue.900"
-        href="github.com/sw-yx/talk-react-summit-demo-cms"
-      >
-        https://github.com/sw-yx/talk-react-summit-demo-cms
-      </Link>
     </Flex>
   );
 }
@@ -155,7 +156,7 @@ function BlogLine({
           {String(blog.title)}
         </Text>
         <Text mt={2} color="gray.500">
-          {String(blog.body.slice(0, 100))}
+          {String(blog.body.slice(0, 90))}...
         </Text>
       </Box>
     </>
@@ -171,11 +172,12 @@ function Editor(props: {
   return (
     <Container
       bgColor="rgba(250, 250, 250,0.5)"
-      mb={{ md: "8", base: "2" }}
+      // mb={{ md: "8", base: "2" }}
       mr="8"
       p="4"
       borderRadius="lg"
       maxWidth="600px"
+      height="fit-content"
     >
       <Formik<Blog>
         initialValues={initVals}
@@ -259,6 +261,22 @@ function Editor(props: {
               justifyContent="space-between"
               flexDirection={{ base: "column", md: "row" }}
             >
+              <Button
+                mt={4}
+                colorScheme="red"
+                variant="ghost"
+                onClick={() => {
+                  _props.resetForm({
+                    values: {
+                      title: "",
+                      image: "",
+                      body: "",
+                    },
+                  });
+                }}
+              >
+                Clear
+              </Button>
               <div>
                 <Button
                   mt={4}
@@ -280,29 +298,13 @@ function Editor(props: {
                 <Button
                   mt={4}
                   ml={4}
-                  colorScheme="red"
-                  variant="ghost"
-                  onClick={() => {
-                    _props.resetForm({
-                      values: {
-                        title: "",
-                        image: "",
-                        body: "",
-                      },
-                    });
-                  }}
+                  colorScheme="teal"
+                  isLoading={_props.isSubmitting}
+                  type="submit"
                 >
-                  Clear
+                  Submit
                 </Button>
               </div>
-              <Button
-                mt={4}
-                colorScheme="teal"
-                isLoading={_props.isSubmitting}
-                type="submit"
-              >
-                Submit
-              </Button>
             </Flex>
           </Form>
         )}
