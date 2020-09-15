@@ -97,7 +97,13 @@ function App() {
           </Grid>
         )}
       </Flex>
-      <Link fontWeight="bold" color="blue.900" href="github.com/sw-yx/talk-react-summit-demo-cms">https://github.com/sw-yx/talk-react-summit-demo-cms</Link>
+      <Link
+        fontWeight="bold"
+        color="blue.900"
+        href="github.com/sw-yx/talk-react-summit-demo-cms"
+      >
+        https://github.com/sw-yx/talk-react-summit-demo-cms
+      </Link>
     </Flex>
   );
 }
@@ -197,7 +203,13 @@ function Editor(props: {
                   isInvalid={form.errors.title && form.touched.title}
                 >
                   <FormLabel htmlFor="title">Title</FormLabel>
-                  <Input {...field} id="title" placeholder="title" mb="8px" />
+                  <Input
+                    {...field}
+                    id="title"
+                    width={{ base: "100%", md: "lg" }}
+                    placeholder="title"
+                    mb="8px"
+                  />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                 </FormControl>
               )}
@@ -215,6 +227,7 @@ function Editor(props: {
                     {...field}
                     id="image"
                     placeholder="https://etc"
+                    width={{ base: "100%", md: "lg" }}
                     mb="8px"
                   />
                   <FormErrorMessage>{form.errors.name}</FormErrorMessage>
@@ -234,7 +247,7 @@ function Editor(props: {
                     {...field}
                     id="body"
                     placeholder="body"
-                    width={{ base: "100%", md: "lg" }}
+                    width={{ base: "100%", md: "100%" }}
                     height={{ base: "100%", md: "lg" }}
                     // size="lg"
                   />
@@ -242,11 +255,14 @@ function Editor(props: {
                 </FormControl>
               )}
             </Field>
-            <Flex justifyContent="space-between" flexDirection={{base: 'column', md: 'row'}}>
+            <Flex
+              justifyContent="space-between"
+              flexDirection={{ base: "column", md: "row" }}
+            >
               <div>
                 <Button
                   mt={4}
-                  ml={4}
+                  // ml={4}
                   type="button"
                   onClick={() => {
                     const article =

@@ -4,3 +4,4 @@ it is a basic CMS with React and TypeScript and you can add an AWS backend easil
 
 I will update this with more info from the talk in future, pls [remind me](https://twitter.com/swyx) if i forget.
 
+Deployed version: https://dev.dwr9z9k8p3l6k.amplifyapp.com
