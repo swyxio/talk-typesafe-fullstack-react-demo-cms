@@ -55,13 +55,13 @@ function App() {
   }
   return (
     <Flex mx={{ md: "8", base: "2" }} flexDirection="column" align="center">
-      <Stack spacing={3} textAlign="center">
-        <Heading as="h1" fontSize={{ md: "4xl", base: "xl" }}>
+      <Stack spacing={3} textAlign="center" background="rgba(250,250,250,0.1)" borderRadius="lg" padding={4} mb={5}>
+        <Heading as="h1" fontSize={{ md: "4xl", base: "xl" }} >
           React + TypeScript + GraphQL + AWS CMS
         </Heading>
         <Link
           fontWeight="bold"
-          my="4"
+          mt="4"
           color="blue.900"
           target="_blank"
           _hover={{ color: "teal.300", backgroundColor: "blue.900" }}
