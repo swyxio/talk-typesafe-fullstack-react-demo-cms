@@ -9,7 +9,7 @@ import {
   FormErrorMessage,
   Box,
   Text,
-  // Link,
+  Link,
   Grid,
   Image,
   Container,
@@ -58,15 +58,11 @@ function App() {
   return (
     <Flex mx={{ md: "8", base: "2" }} flexDirection="column" align="center">
       <Stack spacing={3}>
-        <Heading as="h1" fontSize={{ md: "2xl", base: "xl" }} mb="8">
+        <Heading as="h1" fontSize={{ md: "4xl", base: "xl" }} mb="8">
           React + TypeScript + GraphQL + AWS CMS
         </Heading>
       </Stack>
-      <Flex
-        mx="8"
-        flexDirection={{ md: "row", base: "column" }}
-        justify="center" // supposed to center Editor, didnt center
-      >
+      <Flex mx="8" flexDirection={{ md: "row", base: "column" }}>
         <Editor
           onSubmit={
             currentSelectedBlog ? _updateBlog(currentSelectedBlog) : addBlog
@@ -79,6 +75,10 @@ function App() {
           <Grid
             templateColumns={{ md: "200px 1fr", base: "auto" }}
             columnGap={2}
+            rowGap={2}
+            background="rgba(250,250,250,0.9)"
+            borderRadius="lg"
+            padding={8}
           >
             {blogs.map((blog, key) => {
               return (
@@ -97,6 +97,7 @@ function App() {
           </Grid>
         )}
       </Flex>
+      <Link fontWeight="bold" color="blue.900" href="github.com/sw-yx/talk-react-summit-demo-cms">https://github.com/sw-yx/talk-react-summit-demo-cms</Link>
     </Flex>
   );
 }
@@ -115,7 +116,7 @@ function BlogLine({
       {/* <Box flexShrink={0}> */}
       <Image
         borderRadius="lg"
-        mx="4"
+        // mx="4"
         // width={{ md: 40 }}
         // height={20}
         objectFit="cover"
@@ -124,7 +125,7 @@ function BlogLine({
       />
       {/* </Box> */}
       <Box
-        mt={{ base: 4, md: 0 }}
+        my={{ base: 4, md: 0 }}
         ml={{ md: 6 }}
         onClick={() => setCurrentSelectedBlog(blog)}
         backgroundColor={selected ? "rgba(150,150,250, 0.1)" : undefined}
@@ -136,7 +137,7 @@ function BlogLine({
           letterSpacing="wide"
           color="teal.600"
         >
-          {String(blog.updatedAt)}
+          {String(blog.updatedAt?.toDateString())}
         </Text>
         <Text
           mt={1}
@@ -148,7 +149,7 @@ function BlogLine({
           {String(blog.title)}
         </Text>
         <Text mt={2} color="gray.500">
-          {String(blog.body)}
+          {String(blog.body.slice(0, 100))}
         </Text>
       </Box>
     </>
@@ -163,8 +164,9 @@ function Editor(props: {
   const initVals = props.initVals || ({} as Blog);
   return (
     <Container
-      bgColor="rgba(10,10,10,0.1)"
+      bgColor="rgba(250, 250, 250,0.5)"
       mb={{ md: "8", base: "2" }}
+      mr="8"
       p="4"
       borderRadius="lg"
       maxWidth="600px"
@@ -232,6 +234,7 @@ function Editor(props: {
                     {...field}
                     id="body"
                     placeholder="body"
+                    width={{ base: "100%", md: "lg" }}
                     height={{ base: "100%", md: "lg" }}
                     // size="lg"
                   />
@@ -239,48 +242,52 @@ function Editor(props: {
                 </FormControl>
               )}
             </Field>
-            <Button
-              mt={4}
-              colorScheme="teal"
-              isLoading={_props.isSubmitting}
-              type="submit"
-            >
-              Submit
-            </Button>
-            <Button
-              mt={4}
-              ml={4}
-              type="button"
-              onClick={() => {
-                const article = news[Math.floor(Math.random() * news.length)];
-                props.setCurrentSelectedBlog(undefined);
-                _props.setValues({
-                  title: article.title,
-                  image: article.urlToImage,
-                  body: article.description,
-                });
-              }}
-            >
-              demo
-            </Button>
-
-            <Button
-              mt={4}
-              ml={4}
-              colorScheme="teal"
-              variant="ghost"
-              onClick={() => {
-                _props.resetForm({
-                  values: {
-                    title: "",
-                    image: "",
-                    body: "",
-                  },
-                });
-              }}
-            >
-              Clear
-            </Button>
+            <Flex justifyContent="space-between" flexDirection={{base: 'column', md: 'row'}}>
+              <div>
+                <Button
+                  mt={4}
+                  ml={4}
+                  type="button"
+                  onClick={() => {
+                    const article =
+                      news[Math.floor(Math.random() * news.length)];
+                    props.setCurrentSelectedBlog(undefined);
+                    _props.setValues({
+                      title: article.title,
+                      image: article.urlToImage,
+                      body: article.description,
+                    });
+                  }}
+                >
+                  AutoFill
+                </Button>
+                <Button
+                  mt={4}
+                  ml={4}
+                  colorScheme="red"
+                  variant="ghost"
+                  onClick={() => {
+                    _props.resetForm({
+                      values: {
+                        title: "",
+                        image: "",
+                        body: "",
+                      },
+                    });
+                  }}
+                >
+                  Clear
+                </Button>
+              </div>
+              <Button
+                mt={4}
+                colorScheme="teal"
+                isLoading={_props.isSubmitting}
+                type="submit"
+              >
+                Submit
+              </Button>
+            </Flex>
           </Form>
         )}
       </Formik>
