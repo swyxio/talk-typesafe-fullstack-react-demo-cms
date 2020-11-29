@@ -1,7 +1,5 @@
 ## TypeSafe Fullstack React
 
-> this is a demo for [my React Summit 2020 talk](https://react.geekle.us/#tickets)!
-
 [**See the full writeup on Dev.to here**](https://dev.to/swyx/typesafe-fullstack-react-graphql-with-aws-amplify-b3a)!
 
 ### A React + TypeScript + GraphQL + AWS CMS demo
