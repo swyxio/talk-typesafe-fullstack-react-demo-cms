@@ -14,4 +14,4 @@ I will update this with more info from the talk in future, pls [remind me](https
 
 - Deployed version: https://dev.dwr9z9k8p3l6k.amplifyapp.com
 - Dev.to writeup: https://dev.to/swyx/typesafe-fullstack-react-graphql-with-aws-amplify-b3a
-- Slides: https://docs.google.com/presentation/d/1wU2VCAgdNk67EtxokcKUPMWyHJ5e0wVqcrOjqGLUyqg/edit?usp=sharing
+- Slides: https://docs.google.com/presentation/d/138jJpHxQKmpzuBK7C-kOv31G5CTfSYSkd2qCEMPL-8c/edit?usp=sharing
